@@ -1,17 +1,13 @@
 import React from 'react';
 import './carousel.css';
-import NavBar from './NavBar';
 import Carousel from './Carousel';
 
 class Homepage extends React.Component {
     render() {
         return(
             <div className="Homepage">
-                <div>
-                   <nav className="navigation">
-                   <NavBar/>
-                   </nav>
-                </div>
+				{/* <nav className="navigation">
+                </nav> */}
                 <Carousel data={data}/>
                 </div>
         );
@@ -22,13 +18,16 @@ const data = [{
 	header: 'Gluten-free Bicycle',
 	body: 'Chillwave knausgaard chambray flannel tumblr, narwhal microdosing blog...',
 	colour: '#242846',
-	img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/735173/rvc1.jpg'
+	img: 'https://aboutnewsweekly.com/wp-content/uploads/sites/208/2019/04/starry-night-art-plain_CFh-1200x675.jpg',
+	artist: "Van Gough",
+	title: "Blah blah blah"
 }, {
 	id: 1,
 	header: 'Post-ironic Disrupt',
 	body: 'Swag biodiesel disrupt retro fashion, salvia food truck kitsch wolf DIY...',
 	colour: '#ba9077',
-	img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/735173/rvc2.jpg'
+	img: 'https://cdn.theculturetrip.com/wp-content/uploads/2019/01/vincent_van_gogh_-_the_church_in_auvers-sur-oise_view_from_the_chevet_-_google_art_project.jpg'
+	
 }, {
 	id: 2,
 	header: 'Lumber-Sexual Roof Party ',
