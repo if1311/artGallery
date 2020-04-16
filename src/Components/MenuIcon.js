@@ -2,6 +2,8 @@ import React from "react";
 import "./MenuIcon.css";
 import Menu from "./Menu";
 import Logo from "./Logo";
+import { animated } from "react-spring";
+import { Transition } from "react-spring/renderprops";
 
 class MenuIcon extends React.Component {
   constructor() {
@@ -24,8 +26,28 @@ class MenuIcon extends React.Component {
   render() {
     return (
       <div className="nav-bar">
-        <Menu display={this.state.display} handleClickX={this.handleClickX} />
         <Logo display={this.state.display} />
+        <Transition
+          // native
+          items={this.state.display}
+          from={{ opacity: 0 }}
+          enter={{ opacity: 1 }}
+          leave={{ opacity: 0 }}
+          config={{ delay: 0, duration: 800 }}
+        >
+          {(show) =>
+            show &&
+            ((props) => (
+              <animated.div style={props}>
+                <Menu
+                  display={this.state.display}
+                  handleClickX={this.handleClickX}
+                />
+              </animated.div>
+            ))
+          }
+        </Transition>
+
         <div
           className="menu-icon"
           onClick={this.handleClick}
