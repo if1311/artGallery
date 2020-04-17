@@ -1,13 +1,15 @@
 import React from 'react';
 import './carousel.css';
 import Carousel from './Carousel';
+import NavBar from './NavBar';
 
 class Homepage extends React.Component {
     render() {
         return(
             <div className="Homepage">
-				{/* <nav className="navigation">
-                </nav> */}
+				<nav className="navigation">
+				<NavBar/>
+                </nav>
                 <Carousel data={data}/>
                 </div>
         );

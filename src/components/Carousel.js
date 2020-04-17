@@ -17,30 +17,6 @@ class Carousel extends React.Component {
 			}
 		};
 	}
-
-	// componentDidUpdate() {
-	// 	setTimeout(() => {
-	// 		if (this.state.activeID < 4) {
-	// 			const futureActiveId = this.state.activeID + 1;
-	// 			this.setState({
-	// 				activeID: futureActiveId,
-	// 				wrapperStyle: {
-	// 					backgroundImage: `url('${this.props.data[futureActiveId].img}')`
-	// 				}
-	// 			})
-	// 		} else if (this.state.activeID == 4) {
-	// 			this.setState({
-	// 				activeID: 0,
-	// 				wrapperStyle: {
-	// 					backgroundImage: `url('${this.props.data[0].img}')`
-	// 				}
-
-	// 			})
-
-	// 		}
-	// 	}, 3000)
-	// }
-
 	componentDidMount() {
 		setInterval(() => {
 			if (this.state.activeID < 4) {
@@ -167,11 +143,28 @@ class Selector extends React.Component {
 		);
 	}
 }
+	// componentDidUpdate() {
+	// 	setTimeout(() => {
+	// 		if (this.state.activeID < 4) {
+	// 			const futureActiveId = this.state.activeID + 1;
+	// 			this.setState({
+	// 				activeID: futureActiveId,
+	// 				wrapperStyle: {
+	// 					backgroundImage: `url('${this.props.data[futureActiveId].img}')`
+	// 				}
+	// 			})
+	// 		} else if (this.state.activeID == 4) {
+	// 			this.setState({
+	// 				activeID: 0,
+	// 				wrapperStyle: {
+	// 					backgroundImage: `url('${this.props.data[0].img}')`
+	// 				}
 
-// function ((activeID + 1) % 5)
+	// 			})
 
-
-// setTimeout(, 3000);
+	// 		}
+	// 	}, 3000)
+	// }
 
 //ReactDOM.render(<App data={data} />, document.querySelector('#app'));
 export default Carousel;
