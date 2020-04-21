@@ -15,11 +15,12 @@ class Menu extends React.Component {
             </div>
           </div>
           <div className="menu-items">
-            <h1>Home</h1>
-            <h1>Gallery</h1>
-            <h1>Artists</h1>
-            <h1>About</h1>
-            <h1>Contact</h1>
+            <ul>
+              <li>Home</li>
+              <li>Gallery</li>
+              <li>Artists</li>
+              <li>Contact</li>
+            </ul>
           </div>
         </div>
       );
