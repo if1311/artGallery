@@ -1,0 +1,15 @@
+.ArtistList ul li {
+  cursor: pointer;
+  margin: 10px 0;
+}
+.ArtistList ul {
+  margin-bottom: 0;
+}
+.ArtistList h1 {
+  border-bottom: 1px solid gray;
+  margin-bottom: 30px;
+}
+.modal-detail {
+  width: 90vw !important;
+  max-width: 90vw !important;
+}
