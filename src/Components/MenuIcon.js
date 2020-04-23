@@ -16,11 +16,11 @@ class MenuIcon extends React.Component {
   }
 
   handleClick() {
-    return this.setState({ display: true });
+    return this.setState({ display: !this.state.display });
   }
 
   handleClickX() {
-    return this.setState({ display: false });
+    return this.setState({ display: !this.state.display });
   }
 
   render() {

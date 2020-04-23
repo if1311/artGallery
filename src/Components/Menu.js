@@ -1,9 +1,13 @@
 import React from "react";
 import "./Menu.css";
 import Logo from "./Logo";
+import { Link } from "react-router-dom";
 
 class Menu extends React.Component {
   render() {
+    const menuArr = ["Home", "Gallery", "Artists", "Contact"];
+    const linkArr = ["/Home", "/Gallery", "/Artists", "/Contact"];
+
     if (this.props.display === true) {
       return (
         <div className="menu-container">
@@ -16,10 +20,11 @@ class Menu extends React.Component {
           </div>
           <div className="menu-items">
             <ul>
-              <li>Home</li>
-              <li>Gallery</li>
-              <li>Artists</li>
-              <li>Contact</li>
+              {menuArr.map((item, i) => (
+                <li>
+                  <Link to={linkArr[i]}> {item} </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
