@@ -29,9 +29,10 @@ class MenuIcon extends React.Component {
         <Logo display={this.state.display} />
         <Transition
           // native
+
           items={this.state.display}
           from={{ opacity: 0 }}
-          enter={{ opacity: 1 }}
+          enter={{ opacity: 1, position: "fixed" }}
           leave={{ opacity: 0 }}
           config={{ delay: 0, duration: 800 }}
         >

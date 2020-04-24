@@ -14,7 +14,8 @@
   padding-left: 0px;
 }
 
-.menu-items ul li {
+.menu-items ul li a {
+  text-decoration: none;
   display: block;
   font-size: 60px;
   color: bisque;

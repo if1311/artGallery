@@ -8,16 +8,15 @@ import Dummy from "./Components/Dummy";
 function App() {
   return (
     <div>
-      <div>
-        <NavBar />
-      </div>
+      <NavBar />
       <Switch>
-        <Route path="/Gallery">
-          <PlainText />
-        </Route>
-        <Route path="/Artists" component={Dummy} />
+        <Route exact path="/" component={Dummy} />
+
+        <Route path="/Gallery" component={Dummy} />
+
+        <Route path="/Artists" component={PlainText} />
+
         <Route path="/Contact" component={Dummy} />
-        <Route path="/Home" component={PlainText} />
       </Switch>
     </div>
   );

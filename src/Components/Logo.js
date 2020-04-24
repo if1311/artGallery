@@ -6,7 +6,7 @@ class Logo extends React.Component {
     return (
       <div
         className="logo"
-        style={this.props.display ? { display: "none" } : { display: "" }}
+        style={{ display: this.props.display ? "none" : "" }}
       >
         <img src="#" alt="" />
       </div>
