@@ -21,12 +21,13 @@ body {
 }
 
 input {
-	width: 30%;
+	width: 80%;
 	height: 40px;
 }
 
 .photo {
 	display: flex;
+
 	justify-content: center;
 	align-items: center;
 	background: #fffffe;
@@ -39,4 +40,68 @@ input {
 .heading {
 	width: 100%;
 	text-align: center;
+}
+
+.fullscreen {
+	position: fixed;
+	overflow-y: scroll;
+	left: 0px;
+	top: 0px;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	background: white;
+}
+
+button {
+	float: right;
+}
+
+.highlightImg {
+	width: 100%;
+	height: auto;
+}
+
+.imageDiv {
+	margin-top: 10px;
+	padding: 10px;
+}
+
+.descriptionDiv {
+	text-align: center;
+	padding: 10px;
+}
+
+h4 {
+	color: grey;
+	font-weight: 400;
+	margin-bottom: 0px;
+}
+
+h3 {
+	margin-top: 0px;
+}
+
+@media (min-width: 700px) {
+	.fullContainer {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.descriptionDiv {
+		width: 50%;
+	}
+
+	.imageDiv {
+		margin-top: 0px;
+		width: 50%;
+		text-align: center;
+	}
+
+	.highlightImg {
+		width: 70%;
+	}
 }
