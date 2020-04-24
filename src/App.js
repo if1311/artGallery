@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import NavBar from "./Components/NavBar";
-import PlainText from "./Components/Plain text";
+import PlainText from "./Components/PlainText";
 import { Switch, Route } from "react-router-dom";
 import Dummy from "./Components/Dummy";
 
