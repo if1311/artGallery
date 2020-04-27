@@ -6,9 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import ModalTitle from "react-bootstrap/ModalTitle";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalBody from "react-bootstrap/ModalBody";
-import Media from "react-bootstrap/Media";
-import Alert from "react-bootstrap/Alert";
-import ArtistPopUp from "./ArtistPopUp";
+import ArtistModal from "./ArtistModal";
 // import Modal from "react-modal";
 import axios from "axios";
 import "./ArtistList.css";
@@ -67,55 +65,10 @@ class ArtistList extends React.Component {
           scrollable={true}
         >
           <ModalHeader closeButton>
-            <ModalTitle id="artist-details">Custom Modal Styling</ModalTitle>
+            <ModalTitle id="artist-details">Artist Details</ModalTitle>
           </ModalHeader>
           <ModalBody>
-            <ArtistPopUp currentArtistID={this.state.currentArtistID} />
-            <p>
-              Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae
-              unde commodi aspernatur enim, consectetur. Cumque deleniti
-              temporibus ipsam atque a dolores quisquam quisquam adipisci
-              possimus laboriosam. Quibusdam facilis doloribus debitis! Sit
-              quasi quod accusamus eos quod. Ab quos consequuntur eaque quo rem!
-              Mollitia reiciendis porro quo magni incidunt dolore amet atque
-              facilis ipsum deleniti rem!
-            </p>
-            <p>
-              Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae
-              unde commodi aspernatur enim, consectetur. Cumque deleniti
-              temporibus ipsam atque a dolores quisquam quisquam adipisci
-              possimus laboriosam. Quibusdam facilis doloribus debitis! Sit
-              quasi quod accusamus eos quod. Ab quos consequuntur eaque quo rem!
-              Mollitia reiciendis porro quo magni incidunt dolore amet atque
-              facilis ipsum deleniti rem!
-            </p>
-            <p>
-              Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae
-              unde commodi aspernatur enim, consectetur. Cumque deleniti
-              temporibus ipsam atque a dolores quisquam quisquam adipisci
-              possimus laboriosam. Quibusdam facilis doloribus debitis! Sit
-              quasi quod accusamus eos quod. Ab quos consequuntur eaque quo rem!
-              Mollitia reiciendis porro quo magni incidunt dolore amet atque
-              facilis ipsum deleniti rem!
-            </p>
-            <p>
-              Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae
-              unde commodi aspernatur enim, consectetur. Cumque deleniti
-              temporibus ipsam atque a dolores quisquam quisquam adipisci
-              possimus laboriosam. Quibusdam facilis doloribus debitis! Sit
-              quasi quod accusamus eos quod. Ab quos consequuntur eaque quo rem!
-              Mollitia reiciendis porro quo magni incidunt dolore amet atque
-              facilis ipsum deleniti rem!
-            </p>
-            <p>
-              Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae
-              unde commodi aspernatur enim, consectetur. Cumque deleniti
-              temporibus ipsam atque a dolores quisquam quisquam adipisci
-              possimus laboriosam. Quibusdam facilis doloribus debitis! Sit
-              quasi quod accusamus eos quod. Ab quos consequuntur eaque quo rem!
-              Mollitia reiciendis porro quo magni incidunt dolore amet atque
-              facilis ipsum deleniti rem!
-            </p>
+            <ArtistModal currentArtistID={this.state.currentArtistID} />
           </ModalBody>
         </Modal>
         <Row className="ArtistList">

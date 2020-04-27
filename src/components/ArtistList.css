@@ -1,13 +1,18 @@
-.ArtistList ul li {
-  cursor: pointer;
-  margin: 10px 0;
+.ArtistList {
+  display: flex;
+  justify-content: center;
+}
+h1 {
+  border-bottom: 1px solid gray;
+  margin: 2% 2%;
+  text-align: center;
 }
 .ArtistList ul {
   margin-bottom: 0;
 }
-.ArtistList h1 {
-  border-bottom: 1px solid gray;
-  margin-bottom: 30px;
+.ArtistList ul li {
+  cursor: pointer;
+  margin: 10px 0;
 }
 .modal-detail {
   width: 90vw !important;
