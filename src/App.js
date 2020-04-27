@@ -4,6 +4,7 @@ import NavBar from "./Components/NavBar";
 import PlainText from "./Components/PlainText";
 import { Switch, Route } from "react-router-dom";
 import Dummy from "./Components/Dummy";
+import ArtistList from "./components/ArtistList";
 
 function App() {
   return (
@@ -18,8 +19,8 @@ function App() {
 
         <Route path="/Contact" component={Dummy} />
       </Switch>
+    <ArtistList />
     </div>
   );
-}
 
 export default App;
