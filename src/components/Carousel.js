@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class Carousel extends React.Component {
 	constructor(props) {
@@ -6,15 +6,15 @@ class Carousel extends React.Component {
 		this.state = {
 			activeID: 0,
 			wrapperStyle: {
-				backgroundImage: `url('${this.props.data[0].img}')`
+				backgroundImage: `url('${this.props.data[0].img}')`,
 			},
 			panelStyle: {
-				background: this.props.data[0].colour
+				background: this.props.data[0].colour,
 			},
 			buttonHover: false,
 			buttonStyle: {
-				color: '#ffffff'
-			}
+				color: "#ffffff",
+			},
 		};
 	}
 	componentDidMount() {
@@ -24,37 +24,35 @@ class Carousel extends React.Component {
 				this.setState({
 					activeID: futureActiveId,
 					wrapperStyle: {
-						backgroundImage: `url('${this.props.data[futureActiveId].img}')`
+						backgroundImage: `url('${this.props.data[futureActiveId].img}')`,
 					},
 					panelStyle: {
-						background: this.props.data[futureActiveId].colour
-					}
-				})
-			} else if (this.state.activeID == 4) {
+						background: this.props.data[futureActiveId].colour,
+					},
+				});
+			} else if (this.state.activeID === 4) {
 				this.setState({
 					activeID: 0,
 					wrapperStyle: {
-						backgroundImage: `url('${this.props.data[0].img}')`
+						backgroundImage: `url('${this.props.data[0].img}')`,
 					},
 					panelStyle: {
-						background: this.props.data[0].colour
-					}
-
-				})
-
+						background: this.props.data[0].colour,
+					},
+				});
 			}
-		}, 3000)
+		}, 3000);
 	}
-	
+
 	_changeActive(id) {
 		this.setState({
 			activeID: id,
 			wrapperStyle: {
-				backgroundImage: `url('${this.props.data[id].img}')`
+				backgroundImage: `url('${this.props.data[id].img}')`,
 			},
 			panelStyle: {
-				backgroundColor: this.props.data[id].colour
-			}
+				backgroundColor: this.props.data[id].colour,
+			},
 		});
 	}
 	_buttonColour() {
@@ -62,26 +60,22 @@ class Carousel extends React.Component {
 			this.setState({
 				buttonHover: true,
 				buttonStyle: {
-					color: this.props.data[this.state.activeID].colour
-				}
+					color: this.props.data[this.state.activeID].colour,
+				},
 			});
 		} else {
 			this.setState({
 				buttonHover: false,
 				buttonStyle: {
-					color: '#ffffff'
-				}
+					color: "#ffffff",
+				},
 			});
 		}
 	}
 	render() {
 		return (
 			<section className="wrapper" style={this.state.wrapperStyle}>
-				<Selectors
-					data={this.props.data}
-					activeID={this.state.activeID}
-					_changeActive={this._changeActive.bind(this)}
-				/>
+				<Selectors data={this.props.data} activeID={this.state.activeID} _changeActive={this._changeActive.bind(this)} />
 				<Panel
 					data={this.props.data[this.state.activeID]}
 					panelStyle={this.state.panelStyle}
@@ -97,7 +91,9 @@ class Panel extends React.Component {
 		return (
 			<aside className="panel" style={this.props.panelStyle}>
 				<h2 className="panel-artist">{this.props.data.artist}</h2>
-				<p className="panel-title"><em>{this.props.data.title}</em></p>
+				<p className="panel-title">
+					<em>{this.props.data.title}</em>
+				</p>
 				{/* <button className="panel-button" 
 					style={this.props.buttonStyle}
 					onMouseEnter={this.props._buttonColour}
@@ -119,7 +115,7 @@ class Selectors extends React.Component {
 	render() {
 		return (
 			<div className="selectors">
-				{this.props.data.map((item) =>
+				{this.props.data.map((item) => (
 					<Selector
 						key={item.id}
 						id={item.id}
@@ -127,20 +123,18 @@ class Selectors extends React.Component {
 						_changeActive={this.props._changeActive}
 						activeID={this.props.activeID}
 					/>
-				)}
+				))}
 			</div>
 		);
 	}
 }
 class Selector extends React.Component {
 	render() {
-		let componentClass = 'selector';
+		let componentClass = "selector";
 		if (this.props.activeID === this.props.id) {
-			componentClass = 'selector active';
+			componentClass = "selector active";
 		}
-		return (
-			<div className={componentClass} onClick={this.props._handleClick.bind(this)}></div>
-		);
+		return <div className={componentClass} onClick={this.props._handleClick.bind(this)}></div>;
 	}
 }
 
