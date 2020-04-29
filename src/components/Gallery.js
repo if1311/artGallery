@@ -16,7 +16,7 @@ class Gallery extends Component {
 
 	componentDidMount() {
 		axios
-			.get("https://api.harvardartmuseums.org/object?size=100&page=888&apikey=221b4e10-7bc5-11ea-8865-8f439f2941d8")
+			.get("https://api.harvardartmuseums.org/object?size=100&page=999&apikey=221b4e10-7bc5-11ea-8865-8f439f2941d8")
 			.then((res) => res.data)
 			.then((data) => this.setState({ imagesList: data.records }));
 	}
