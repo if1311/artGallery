@@ -18,6 +18,8 @@ class ArtistList extends React.Component {
       artists: [],
       isModalOpen: false,
       currentArtistID: 0,
+      currentArtistName: "",
+      currentArtistDate: null,
     };
   }
   closeModal = () => {
@@ -26,21 +28,25 @@ class ArtistList extends React.Component {
       isModalOpen: false,
     });
   };
-  openModal = (id) => {
+  openModal = (id, name, date) => {
     console.log("opening modal");
-    console.log(id);
+    console.log(name, date);
     this.setState({
       isModalOpen: true,
       currentArtistID: id,
+      currentArtistName: name,
+      currentArtistDate: date,
     });
   };
   componentDidMount() {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
+      .get(
+        "https://api.harvardartmuseums.org/person?&size=99&apikey=912dd280-8897-11ea-953e-e1f9ff450a61&sort=objectcount&sortorder=desc"
+      )
       .then((response) => {
         // console.log(response);
         this.setState({
-          artists: response.data,
+          artists: response.data.records,
         });
       })
       .catch((error) => {
@@ -48,6 +54,9 @@ class ArtistList extends React.Component {
       });
   }
   render() {
+    const artists1 = this.state.artists.slice(0, 33);
+    const artists2 = this.state.artists.slice(33, 66);
+    const artists3 = this.state.artists.slice(66, 99);
     return (
       <Container>
         <h1>ARTISTS</h1>
@@ -68,47 +77,66 @@ class ArtistList extends React.Component {
             <ModalTitle id="artist-details">Artist Details</ModalTitle>
           </ModalHeader>
           <ModalBody>
-            <ArtistModal currentArtistID={this.state.currentArtistID} />
+            <ArtistModal
+              currentArtistID={this.state.currentArtistID}
+              currentArtistName={this.state.currentArtistName}
+              currentArtistDate={this.state.currentArtistDate}
+            />
           </ModalBody>
         </Modal>
         <Row className="ArtistList">
-          <Col lg={3} md={4} sm={6} xs={12}>
+          <Col lg={4} md={4} sm={6} xs={12}>
             <ul>
-              {this.state.artists.map((artist) => {
+              {artists1.map((artist) => {
                 return (
                   <li
-                    onClick={this.openModal.bind(this, artist.id)}
+                    onClick={this.openModal.bind(
+                      this,
+                      artist.id,
+                      artist.displayname,
+                      artist.displaydate
+                    )}
                     key={artist.id}
                   >
-                    {artist.name}
+                    {artist.displayname}
                   </li>
                 );
               })}
             </ul>
           </Col>
-          <Col lg={3} md={4} sm={6} xs={12}>
+          <Col lg={4} md={4} sm={6} xs={12}>
             <ul>
-              {this.state.artists.map((artist) => {
+              {artists2.map((artist) => {
                 return (
                   <li
-                    onClick={this.openModal.bind(this, artist.name)}
+                    onClick={this.openModal.bind(
+                      this,
+                      artist.id,
+                      artist.displayname,
+                      artist.displaydate
+                    )}
                     key={artist.id}
                   >
-                    {artist.name}
+                    {artist.displayname}
                   </li>
                 );
               })}
             </ul>
           </Col>
-          <Col lg={3} md={4} sm={6} xs={12}>
+          <Col lg={4} md={4} sm={6} xs={12}>
             <ul>
-              {this.state.artists.map((artist) => {
+              {artists3.map((artist) => {
                 return (
                   <li
-                    onClick={this.openModal.bind(this, artist.name)}
+                    onClick={this.openModal.bind(
+                      this,
+                      artist.id,
+                      artist.displayname,
+                      artist.displaydate
+                    )}
                     key={artist.id}
                   >
-                    {artist.name}
+                    {artist.displayname}
                   </li>
                 );
               })}

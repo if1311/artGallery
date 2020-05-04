@@ -18,3 +18,10 @@ h1 {
   width: 90vw !important;
   max-width: 90vw !important;
 }
+
+.ArtistWorks img {
+  max-height: 15vw;
+}
+.date {
+  text-align: center;
+}
