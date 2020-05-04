@@ -87,9 +87,7 @@ export default class MasonryGallery extends Component {
           imagesList: data.records,
           next: data.info.next,
           prev: data.info.prev,
-          items: data.records.map((item) => (
-            <ImageInGallery src={item.primaryimageurl} />
-          )),
+          items: data.records.map((item) => <img src={item.primaryimageurl} />),
         })
       );
   }

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Masonry } from "masonic";
 import axios from "axios";
 import styled from "styled-components";
-import ImageInGallery from "./ImageInGallery";
 import FilterItem from "./FilterItem";
 import Filters from "./Filters";
 import { categs } from "./categs";
