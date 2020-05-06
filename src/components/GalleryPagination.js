@@ -3,35 +3,52 @@ import axios from "axios";
 import styled from "styled-components";
 import ImageInGallery from "./ImageInGallery";
 import FilterItem from "./FilterItem";
-import Filters from "./Filters";
+// import Filters from "./Filters";
 import { categs } from "./categs";
+import { periods } from "./periods";
+import { technique } from "./technique";
 
-const FilterButton = styled.button`
-  width: 100px;
+const ButtonWrapper = styled.ul`
+  width: 80%;
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: inherit;
+  justify-content: space-around;
+  color: #284b63;
+`;
+const FilterButton = styled.li`
   /* position: relative; */
   /* top: 20%; */
-  height: 50px;
+  border: none;
+
+  background-color: inherit;
+  list-style-type: none;
+  text-align: center;
+  cursor: pointer;
+  color: #284b63;
 `;
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #ffffff;
 `;
 
 const GalleryWrapper = styled.div`
+  width: 80%;
   display: grid;
   padding: 15px;
-  border: 2px solid black;
+  border: none;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
 `;
 
 const StyledUl = styled.ul`
-  height: 150px;
+  height: 135px;
   overflow: scroll;
-  display: ${(props) => (props.showCategories ? "flex" : "none")};
-  width: 75%;
+  display: flex;
+  width: 80%;
   flex-direction: row;
   flex-wrap: wrap;
   list-style: none;
@@ -40,6 +57,7 @@ const StyledUl = styled.ul`
   align-self: center;
 
   overflow-x: hidden;
+
 `;
 
 export default class GalleryPagination extends Component {
@@ -55,17 +73,63 @@ export default class GalleryPagination extends Component {
       page: 1,
       info: null,
       categories: categs,
+      periods: periods,
+      technique: technique,
+      showTechnique: false,
+      showPeriods: false,
       showCategories: false,
+      filter: null,
     };
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
-    this.filterCall = this.filterCall.bind(this);
+    this.filterCallCategories = this.filterCallCategories.bind(this);
+    this.filterCallPeriod = this.filterCallPeriod.bind(this);
+    this.filterCallTechnique = this.filterCallTechnique.bind(this);
+    this.checkFilter = this.checkFilter.bind(this);
+    // this.flexibleAPICall = this.flexibleAPICall.bind(this);
   }
-  filterCall(event) {
-    console.log(event.target.value);
+
+  // flexibleAPICall() {
+  //   axios
+  //     .get(
+  //       "https://api.harvardartmuseums.org/technique?apikey=e8cc9db0-884b-11ea-8c3f-cde07fe08362&size=400"
+  //     )
+  //     .then((res) => res.data)
+  //     .then((data) => console.log(data.records.map((e) => e.name)));
+  // }
+
+  filterCallCategories(event) {
     axios
       .get(
         `https://api.harvardartmuseums.org/object?size=20&page=1&apikey=${this.state.apikey}&classification=${event.target.innerText}&hasimage=1`
+      )
+      .then((res) => res.data)
+      .then((data) =>
+        this.setState({
+          imagesList: data.records,
+          next: data.info.next,
+          prev: data.info.prev,
+        })
+      );
+  }
+  filterCallPeriod(event) {
+    axios
+      .get(
+        `https://api.harvardartmuseums.org/object?size=20&page=1&apikey=${this.state.apikey}&period=${event.target.innerText}&hasimage=1`
+      )
+      .then((res) => res.data)
+      .then((data) =>
+        this.setState({
+          imagesList: data.records,
+          next: data.info.next,
+          prev: data.info.prev,
+        })
+      );
+  }
+  filterCallTechnique(event) {
+    axios
+      .get(
+        `https://api.harvardartmuseums.org/object?size=20&page=1&apikey=${this.state.apikey}&technique=${event.target.innerText}&hasimage=1`
       )
       .then((res) => res.data)
       .then((data) =>
@@ -106,7 +170,7 @@ export default class GalleryPagination extends Component {
   componentDidMount() {
     axios
       .get(
-        `https://api.harvardartmuseums.org/object?size=20&page=${this.state.page}&apikey=${this.state.apikey}`
+        `https://api.harvardartmuseums.org/object?size=20&page=1&apikey=${this.state.apikey}&hasimage=1`
       )
       .then((res) => res.data)
       .then((data) => {
@@ -118,22 +182,95 @@ export default class GalleryPagination extends Component {
         console.log(data.info.next);
       });
   }
+  checkFilter() {
+    switch (this.state.filter) {
+      case "categories":
+        return (
+          <StyledUl>
+            {this.state.categories.map((e) => (
+              <FilterItem
+                name={e}
+                function={this.filterCallCategories}
+              ></FilterItem>
+            ))}{" "}
+          </StyledUl>
+        );
+      case "period":
+        return (
+          <StyledUl>
+            {this.state.periods.map((e) => (
+              <FilterItem
+                name={e}
+                function={this.filterCallPeriod}
+              ></FilterItem>
+            ))}{" "}
+          </StyledUl>
+        );
+      case "technique":
+        return (
+          <StyledUl>
+            {this.state.technique.map((e) => (
+              <FilterItem
+                name={e}
+                function={this.filterCallTechnique}
+              ></FilterItem>
+            ))}{" "}
+          </StyledUl>
+        );
+      default:
+        return null;
+    }
+  }
 
   render() {
     return (
       <MainWrapper>
-        <FilterButton
-          onClick={() =>
-            this.setState({ showCategories: !this.state.showCategories })
-          }
-        >
-          filter
-        </FilterButton>
-        <StyledUl showCategories={this.state.showCategories}>
-          {this.state.categories.map((e) => (
-            <FilterItem name={e} function={this.filterCall}></FilterItem>
+        <ButtonWrapper>
+          <FilterButton
+            onClick={() => {
+              this.setState({ filter: "categories" });
+            }}
+          >
+            categories
+          </FilterButton>
+
+          <FilterButton onClick={() => this.setState({ filter: "period" })}>
+            periods
+          </FilterButton>
+          <FilterButton onClick={() => this.setState({ filter: "technique" })}>
+            technique
+          </FilterButton>
+          <FilterButton onClick={() => this.setState({ filter: null })}>
+            clear
+          </FilterButton>
+        </ButtonWrapper>
+        {this.checkFilter()}
+        {/* {this.state.filter === "categories" ? (
+          <StyledUl>
+            {this.state.categories.map((e) => (
+              <FilterItem
+                name={e}
+                function={this.filterCallCategories}
+              ></FilterItem>
+            ))}{" "}
+          </StyledUl>
+        ) : null}
+
+        <StyledUl showPeriod={this.state.showPeriod}>
+          {this.state.periods.map((e) => (
+            <FilterItem name={e} function={this.filterCallPeriod}></FilterItem>
           ))}
         </StyledUl>
+
+        {console.log(this.state.periods)}
+        <StyledUl showTechnique={this.state.showTechnique}>
+          {this.state.technique.map((e) => (
+            <FilterItem
+              name={e}
+              function={this.filterCallTechnique}
+            ></FilterItem>
+          ))}
+        </StyledUl> */}
 
         <GalleryWrapper>
           {this.state.imagesList === null ? (
@@ -153,7 +290,7 @@ export default class GalleryPagination extends Component {
           <button onClick={this.nextPage}>NEXT PAGE</button>
         ) : null}
         {this.state.prev != null ? (
-          <button onClick={() => this.prevPage()}>PREV PAGE</button>
+          <button onClick={this.prevPage}>PREV PAGE</button>
         ) : null}
       </MainWrapper>
     );
