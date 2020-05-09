@@ -6,7 +6,7 @@ class Carousel extends React.Component {
 		this.state = {
 			activeID: 0,
 			wrapperStyle: {
-				backgroundImage: 'url("../images/mona-lisa.jpg")',
+				backgroundImage: 'url("../images/the-girl-with-a-pearl-earring.jpg")',
 			},
 			panelStyle: {
 				background: this.props.data[0].colour,
