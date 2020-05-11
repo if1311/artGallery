@@ -6,9 +6,9 @@ export default class FullImage extends Component {
 		return (
 			<div className="fullscreen">
 				<div>
-					<div className="menu-icon-x" onClick={this.props.showImage}>
-						<div className="mob-menu1-x"></div>
-						<div className="mob-menu3-x"></div>
+					<div className="menu-icon-x-gall" onClick={this.props.showImage}>
+						<div className="mob-menu1-x-gall"></div>
+						<div className="mob-menu3-x-gall"></div>
 					</div>
 				</div>
 
