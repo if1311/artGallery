@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import ArtistList from "./components/ArtistList";
+import ArtistList2 from "./components/ArtistList2";
 import ArtistModal from "./components/ArtistModal";
 import ArtistDetails from "./components/ArtistDetails";
 

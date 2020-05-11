@@ -5,15 +5,22 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import axios from "axios";
 import ArtistDetails from "./ArtistDetails";
-import ArtistWorks from "./ArtistWorks";
 import "./ArtistList.css";
+import Masonry from "react-masonry-css";
 
 class ArtistModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       works: [],
-      message: "Loading...",
+      message: "",
+      breakpointsColumnsObj: {
+        default: 3,
+        1200: 3,
+        992: 2,
+        768: 1,
+        576: 1,
+      },
     };
   }
   componentDidMount() {
@@ -23,49 +30,63 @@ class ArtistModal extends React.Component {
           this.props.currentArtistID
       )
       .then((response) => {
-        // console.log(response);
-        this.setState({
-          works: response.data.records,
-        });
+        console.log(response.data.records);
+        response.data.records.length > 0 &&
+        response.data.records[0].images &&
+        response.data.records[0].images.length > 0
+          ? this.setState({
+              works: response.data.records,
+              message: "",
+            })
+          : this.setState({
+              message: "No images are available for this artist",
+            });
       })
       .catch((error) => {
         console.log(error);
       });
-    // if (this.state.works.length < 1) {
-    //   imageHTML = (
-    //     <Col key="c1" md={12} className="text-center text-danger h5">
-    //       setTimeout(() =>{" "}
-    //       {this.setState({
-    //         message: "No images are available for this artist",
-    //       })}
-    //       , 3000);
-    //     </Col>
-    //   );
-    // }
   }
 
   render() {
-    let imageCount = 0;
-    let imageHTML = this.state.works.map((work) => {
-      if (work.primaryimageurl) {
-        imageCount++;
-        return (
-          <Col key={work.id} md={4} lg={3} sm={6} xs={12}>
-            <a href={work.primaryimageurl} target="_blank">
-              <Image className="img" src={work.primaryimageurl} />
-            </a>
-          </Col>
-        );
-      }
-    });
-
     return (
       <Container fluid>
         <ArtistDetails
           name={this.props.currentArtistName}
           date={this.props.currentArtistDate}
         />
-        <Row className="ArtistWorks">{imageHTML}</Row>
+        <Row className="ArtistWorks">
+          <Col md={12} xl={12} lg={12}>
+            {" "}
+            {this.state.message === "" ? (
+              <Masonry
+                breakpointCols={this.state.breakpointsColumnsObj}
+                className="artist-masonry-grid"
+                columnClassName="artist-masonry-grid_column"
+              >
+                {this.state.works.map((work) =>
+                  work.primaryimageurl &&
+                  work.images &&
+                  work.images.length > 0 ? (
+                    <Container key={work.id}>
+                      <Row>
+                        <Col md={12}>
+                          <Image
+                            fluid
+                            className="padded-image"
+                            className="img"
+                            src={work.primaryimageurl}
+                          />
+                        </Col>
+                      </Row>
+                    </Container>
+                  ) : null
+                )}
+              </Masonry>
+            ) : (
+              <h4>{this.state.message}</h4>
+            )}
+          </Col>
+        </Row>
       </Container>
     );
   }

@@ -2,6 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import ModalTitle from "react-bootstrap/ModalTitle";
 import ModalHeader from "react-bootstrap/ModalHeader";
@@ -10,6 +11,30 @@ import ArtistModal from "./ArtistModal";
 // import Modal from "react-modal";
 import axios from "axios";
 import "./ArtistList.css";
+import styled from "styled-components";
+
+const StyledUl = styled.ul`
+  border: 0;
+  list-style-type: disc;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  word-wrap: break-word;
+`;
+
+const StyledRow = styled(Row)`
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: space-between;
+`;
+
+const PagButton = styled.button`
+  border: 0;
+  background-color: #ffffff;
+  border-radius: 0;
+  &:hover {
+    color: gray;
+  }
+`;
 
 class ArtistList extends React.Component {
   constructor(props) {
@@ -20,7 +45,12 @@ class ArtistList extends React.Component {
       currentArtistID: 0,
       currentArtistName: "",
       currentArtistDate: null,
+      next: null,
+      prev: null,
     };
+    this.fetchNextPage = this.fetchNextPage.bind(this);
+    this.fetchPrevPage = this.fetchPrevPage.bind(this);
+    this.openModal = this.openModal.bind(this);
   }
   closeModal = () => {
     console.log("closing modal");
@@ -38,25 +68,51 @@ class ArtistList extends React.Component {
       currentArtistDate: date,
     });
   };
+  sortArtists() {}
+
   componentDidMount() {
     axios
       .get(
-        "https://api.harvardartmuseums.org/person?&size=99&apikey=912dd280-8897-11ea-953e-e1f9ff450a61&sort=objectcount&sortorder=desc"
+        "https://api.harvardartmuseums.org/person?&size=60&apikey=912dd280-8897-11ea-953e-e1f9ff450a61&sort=objectcount&sortorder=desc"
       )
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         this.setState({
           artists: response.data.records,
+          next: response.data.info.next,
         });
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
+  fetchNextPage() {
+    console.log(this.state.next);
+    axios
+      .get(this.state.next)
+      .then((res) => res.data)
+      .then((response) =>
+        this.setState({
+          artists: response.records,
+          next: response.info.next,
+          prev: response.info.prev,
+        })
+      );
+  }
+  fetchPrevPage() {
+    axios
+      .get(this.state.prev)
+      .then((res) => res.data)
+      .then((response) =>
+        this.setState({
+          artists: response.records,
+          next: response.info.next,
+          prev: response.info.prev,
+        })
+      );
+  }
   render() {
-    const artists1 = this.state.artists.slice(0, 33);
-    const artists2 = this.state.artists.slice(33, 66);
-    const artists3 = this.state.artists.slice(66, 99);
     return (
       <Container>
         <h1>ARTISTS</h1>
@@ -76,7 +132,7 @@ class ArtistList extends React.Component {
           <ModalHeader closeButton>
             <ModalTitle id="artist-details">Artist Details</ModalTitle>
           </ModalHeader>
-          <ModalBody>
+          <ModalBody fluid>
             <ArtistModal
               currentArtistID={this.state.currentArtistID}
               currentArtistName={this.state.currentArtistName}
@@ -85,64 +141,37 @@ class ArtistList extends React.Component {
           </ModalBody>
         </Modal>
         <Row className="ArtistList">
-          <Col lg={4} md={4} sm={12} xs={12}>
-            <ul>
-              {artists1.map((artist) => {
+          <StyledUl>
+            {this.state.artists
+              .sort(
+                (a, b) => a.alphasort && a.alphasort.localeCompare(b.alphasort)
+              )
+              .map((artist) => {
                 return (
                   <li
-                    onClick={this.openModal.bind(
-                      this,
-                      artist.id,
-                      artist.displayname,
-                      artist.displaydate
-                    )}
+                    onClick={() =>
+                      this.openModal(
+                        artist.id,
+                        artist.displayname,
+                        artist.displaydate
+                      )
+                    }
                     key={artist.id}
                   >
                     {artist.displayname}
                   </li>
                 );
               })}
-            </ul>
-          </Col>
-          <Col lg={4} md={4} sm={12} xs={12}>
-            <ul>
-              {artists2.map((artist) => {
-                return (
-                  <li
-                    onClick={this.openModal.bind(
-                      this,
-                      artist.id,
-                      artist.displayname,
-                      artist.displaydate
-                    )}
-                    key={artist.id}
-                  >
-                    {artist.displayname}
-                  </li>
-                );
-              })}
-            </ul>
-          </Col>
-          <Col lg={4} md={4} sm={12} xs={12}>
-            <ul>
-              {artists3.map((artist) => {
-                return (
-                  <li
-                    onClick={this.openModal.bind(
-                      this,
-                      artist.id,
-                      artist.displayname,
-                      artist.displaydate
-                    )}
-                    key={artist.id}
-                  >
-                    {artist.displayname}
-                  </li>
-                );
-              })}
-            </ul>
-          </Col>
+          </StyledUl>
         </Row>
+        <StyledRow>
+          {this.state.next ? (
+            <PagButton onClick={this.fetchNextPage}>Next Page</PagButton>
+          ) : null}
+          {this.state.prev ? (
+            <PagButton onClick={this.fetchPrevPage}>Previous Page</PagButton>
+          ) : null}
+        </StyledRow>
       </Container>
     );
   }
