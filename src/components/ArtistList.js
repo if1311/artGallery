@@ -85,7 +85,7 @@ class ArtistList extends React.Component {
           </ModalBody>
         </Modal>
         <Row className="ArtistList">
-          <Col lg={4} md={4} sm={6} xs={12}>
+          <Col lg={4} md={4} sm={12} xs={12}>
             <ul>
               {artists1.map((artist) => {
                 return (
@@ -104,7 +104,7 @@ class ArtistList extends React.Component {
               })}
             </ul>
           </Col>
-          <Col lg={4} md={4} sm={6} xs={12}>
+          <Col lg={4} md={4} sm={12} xs={12}>
             <ul>
               {artists2.map((artist) => {
                 return (
@@ -123,7 +123,7 @@ class ArtistList extends React.Component {
               })}
             </ul>
           </Col>
-          <Col lg={4} md={4} sm={6} xs={12}>
+          <Col lg={4} md={4} sm={12} xs={12}>
             <ul>
               {artists3.map((artist) => {
                 return (

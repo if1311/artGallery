@@ -13,6 +13,7 @@ class ArtistModal extends React.Component {
     super(props);
     this.state = {
       works: [],
+      message: "Loading...",
     };
   }
   componentDidMount() {
@@ -30,37 +31,40 @@ class ArtistModal extends React.Component {
       .catch((error) => {
         console.log(error);
       });
+    // if (this.state.works.length < 1) {
+    //   imageHTML = (
+    //     <Col key="c1" md={12} className="text-center text-danger h5">
+    //       setTimeout(() =>{" "}
+    //       {this.setState({
+    //         message: "No images are available for this artist",
+    //       })}
+    //       , 3000);
+    //     </Col>
+    //   );
+    // }
   }
+
   render() {
     let imageCount = 0;
     let imageHTML = this.state.works.map((work) => {
       if (work.primaryimageurl) {
         imageCount++;
         return (
-          <Col key={work.id} md={3} lg={3} sm={4} xs={6}>
+          <Col key={work.id} md={4} lg={3} sm={6} xs={12}>
             <a href={work.primaryimageurl} target="_blank">
-              <Image thumbnail src={work.primaryimageurl} />
+              <Image className="img" src={work.primaryimageurl} />
             </a>
           </Col>
         );
       }
     });
 
-    if (imageCount == 0) {
-      imageHTML = (
-        <Col key="c1" md={12} className="text-center text-danger h5">
-          No image is available for this artist.
-        </Col>
-      );
-    }
-
     return (
-      <Container>
+      <Container fluid>
         <ArtistDetails
           name={this.props.currentArtistName}
           date={this.props.currentArtistDate}
         />
-        {/* onerror="this.onerror=null;this.src='https://user-images.githubusercontent.com/3187493/80253872-1a959780-8648-11ea-826c-fc2a8b6cc082.png';" */}
         <Row className="ArtistWorks">{imageHTML}</Row>
       </Container>
     );
