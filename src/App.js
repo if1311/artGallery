@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import NavBar from "./Components/NavBar";
-import PlainText from "./Components/PlainText";
+import NavBar from "./components/NavBar";
+import PlainText from "./components/PlainText";
 import { Switch, Route } from "react-router-dom";
-import Dummy from "./Components/Dummy";
+import Dummy from "./components/Dummy";
 
 function App() {
   return (
@@ -12,11 +12,11 @@ function App() {
       <Switch>
         <Route exact path="/" component={Dummy} />
 
-        <Route path="/Gallery" component={Dummy} />
+        <Route path="/gallery" component={Dummy} />
 
-        <Route path="/Artists" component={PlainText} />
+        <Route path="/artists" component={PlainText} />
 
-        <Route path="/Contact" component={Dummy} />
+        <Route path="/contact" component={Dummy} />
       </Switch>
     </div>
   );
