@@ -5,7 +5,10 @@ export default class FullImage extends Component {
 		return (
 			<div className="fullscreen">
 				<div>
-					<button onClick={this.props.showImage}>Close</button>
+					<div className="menu-icon-x" onClick={this.props.showImage}>
+						<div className="mob-menu1-x"></div>
+						<div className="mob-menu3-x"></div>
+					</div>
 				</div>
 
 				<div className="fullContainer">
@@ -16,17 +19,17 @@ export default class FullImage extends Component {
 					</div>
 					<div className="descriptionDiv">
 						<h4 style={{ display: this.props.name ? "block" : "none" }}>Artist</h4>
-						<h3>{this.props.name}</h3>
+						<h3>{this.props.name ? this.props.name : "Unknown"}</h3>
 						<h4>Title</h4>
-						<h3>{this.props.title}</h3>
+						<h3>{this.props.title ? this.props.title : "Unknown"}</h3>
 						<h4>Date</h4>
-						<h3>{this.props.date}</h3>
+						<h3>{this.props.date ? this.props.date : "Unknown"}</h3>
 						<h4>Technique</h4>
-						<h3>{this.props.technique}</h3>
+						<h3>{this.props.technique ? this.props.technique : "Unknown"}</h3>
 						<h4>Category</h4>
-						<h3>{this.props.category}</h3>
+						<h3>{this.props.category ? this.props.category : "Unknown"}</h3>
 						<h4>Culture</h4>
-						<h3>{this.props.culture}</h3>
+						<h3>{this.props.culture ? this.props.culture : "Unknown"}</h3>
 					</div>
 				</div>
 			</div>
