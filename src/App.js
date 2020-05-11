@@ -1,12 +1,33 @@
 import React from "react";
-// import Gallery from "./components/Gallery";
-// import GalleryPagination from "./components/GalleryPagination";
-// import MasonryGallery from "./components/MasonryGallery";
-// import Masonic from "./components/Masonic";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Mgal from "./components/MGal";
-const App = () => {
-  return <Mgal />;
-};
+import "./App.css";
+import NavBar from "./components/NavBar";
+import PlainText from "./components/PlainText";
+import { Switch, Route } from "react-router-dom";
+import Dummy from "./components/Dummy";
+import Homepage from "./components/Homepage";
+
+
+
+function App() {
+	return (
+		<div>
+			<NavBar />
+			<Homepage />
+    
+			<Switch>
+				<Route exact path="/" component={Dummy} />
+
+				<Route path="/gallery" component={Mgal} />
+
+				<Route path="/artists" component={PlainText} />
+
+				<Route path="/contact" component={Dummy} />
+			</Switch>
+		</div>
+	);
+}
+
 
 export default App;
