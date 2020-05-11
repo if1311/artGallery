@@ -55,6 +55,30 @@ input {
 	background: white;
 }
 
+.menu-icon-x {
+	display: inline-block;
+	padding: 20px;
+	float: right;
+}
+
+.mob-menu1-x,
+.mob-menu3-x {
+	width: 40px;
+	height: 3px;
+	background-color: rgb(70, 70, 70);
+	/* margin: 6px; */
+}
+
+.mob-menu1-x {
+	-webkit-transform: rotate(-45deg) translate(-9px, 6px);
+	transform: rotate(-45deg) translate(-10px, 6px);
+}
+
+.mob-menu3-x {
+	-webkit-transform: rotate(45deg) translate(-9px, 6px);
+	transform: rotate(45deg) translate(4px, 8px);
+}
+
 button {
 	float: right;
 }
@@ -78,10 +102,12 @@ h4 {
 	color: grey;
 	font-weight: 400;
 	margin-bottom: 0px;
+	font-size: 1.1em;
 }
 
 h3 {
 	margin-top: 0px;
+	font-size: 1.5em;
 }
 
 @media (min-width: 700px) {
