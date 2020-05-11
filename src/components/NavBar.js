@@ -1,12 +1,12 @@
 import React from "react";
-import MenuIcon from "./MenuIcon";
+import MenuIcon from "../components/MenuIcon";
 
 function NavBar() {
-  return (
-    <div>
-      <MenuIcon />
-    </div>
-  );
+	return (
+		<div>
+			<MenuIcon />
+		</div>
+	);
 }
 
 export default NavBar;

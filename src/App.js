@@ -8,16 +8,13 @@ import { Switch, Route } from "react-router-dom";
 import Dummy from "./components/Dummy";
 import Homepage from "./components/Homepage";
 
-
-
 function App() {
 	return (
 		<div>
 			<NavBar />
-			<Homepage />
-    
+
 			<Switch>
-				<Route exact path="/" component={Dummy} />
+				<Route exact path="/" component={Homepage} />
 
 				<Route path="/gallery" component={Mgal} />
 
@@ -28,6 +25,5 @@ function App() {
 		</div>
 	);
 }
-
 
 export default App;
