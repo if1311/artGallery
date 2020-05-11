@@ -91,15 +91,7 @@ class Panel extends React.Component {
 		return (
 			<aside className="panel" style={this.props.panelStyle}>
 				<h2 className="panel-artist">{this.props.data.artist}</h2>
-				<p className="panel-title">
-					<em>{this.props.data.title}</em>
-				</p>
-				{/* <button className="panel-button" 
-					style={this.props.buttonStyle}
-					onMouseEnter={this.props._buttonColour}
-					onMouseLeave={this.props._buttonColour}>
-					Read More
-				</button> */}
+				<p className="panel-title">{this.props.data.title}</p>
 			</aside>
 		);
 	}

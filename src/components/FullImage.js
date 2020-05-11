@@ -5,7 +5,7 @@ export default class FullImage extends Component {
 	render() {
 		return (
 			<div className="fullscreen">
-				<div>
+				<div className="closeContainer">
 					<div className="menu-icon-x-gall" onClick={this.props.showImage}>
 						<div className="mob-menu1-x-gall"></div>
 						<div className="mob-menu3-x-gall"></div>

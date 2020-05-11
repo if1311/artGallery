@@ -53,18 +53,26 @@ input {
 	background: white;
 }
 
+.closeContainer {
+	display: flex;
+	justify-content: flex-end;
+	width: 100vw;
+	height: 50px;
+	position: relative;
+	right: 20px;
+}
+
 .menu-icon-x-gall {
-	display: inline-block;
-	padding: 20px;
-	height: 40px;
+	margin-top: 20px;
 	width: 40px;
+	height: 40px;
 }
 
 .mob-menu1-x-gall,
 .mob-menu3-x-gall {
 	width: 40px;
 	height: 3px;
-	background-color: rgb(70, 70, 70);
+	background-color: #353535;
 	/* margin: 6px; */
 }
 
@@ -104,13 +112,13 @@ h4 {
 	font-size: 1.1em;
 }
 
-h3 {
+.descriptionDiv h3 {
 	margin-top: 0px;
 	font-size: 1.5em;
 
-	color: grey;
-	font-weight: 400;
-	margin-bottom: 0px;
+	color: #353535;
+	font-weight: 600;
+	margin-bottom: 20px;
 }
 
 @media (min-width: 700px) {

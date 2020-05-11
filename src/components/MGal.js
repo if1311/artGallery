@@ -16,6 +16,7 @@ import { technique } from "./resources/technique";
 import { FilterToggleLink } from "./styled-components/FilterToggleLink";
 import { FiltersWrapper } from "./styled-components/FiltersWrapper";
 import Spinner from "react-bootstrap/Spinner";
+import NavBar from "./NavBar";
 import "./Gallery.css";
 
 import FullImage from "./FullImage";
@@ -148,62 +149,71 @@ export default class MGal extends Component {
 
 	render() {
 		return (
-			<Container>
-				{this.state.imageDiv && (
-					<FullImage
-						currentImage={this.state.currentImage.primaryimageurl}
-						name={this.state.currentImage.people ? this.state.currentImage.people[0].name : null}
-						title={this.state.currentImage.title}
-						date={this.state.currentImage.dated}
-						category={this.state.currentImage.classification}
-						technique={this.state.currentImage.technique}
-						culture={this.state.currentImage.culture}
-						showImage={this.showImage}
-					/>
-				)}
-				<Row>
-					{" "}
-					<StyledCol>
-						<FiltersWrapper>
-							<FilterToggleLink
-								onClick={() =>
-									this.state.filter !== "classification" ? this.setState({ filter: "classification" }) : this.setState({ filter: null })
-								}
-							>
-								classification
-							</FilterToggleLink>
+			<div>
+				<NavBar />
+				<Container>
+					{this.state.imageDiv && (
+						<FullImage
+							currentImage={this.state.currentImage.primaryimageurl}
+							name={this.state.currentImage.people ? this.state.currentImage.people[0].name : null}
+							title={this.state.currentImage.title}
+							date={this.state.currentImage.dated}
+							category={this.state.currentImage.classification}
+							technique={this.state.currentImage.technique}
+							culture={this.state.currentImage.culture}
+							showImage={this.showImage}
+						/>
+					)}
+					<Row>
+						{" "}
+						<StyledCol>
+							<FiltersWrapper>
+								<FilterToggleLink
+									onClick={() =>
+										this.state.filter !== "classification" ? this.setState({ filter: "classification" }) : this.setState({ filter: null })
+									}
+								>
+									classification
+								</FilterToggleLink>
 
-							<FilterToggleLink
-								onClick={() => (this.state.filter !== "period" ? this.setState({ filter: "period" }) : this.setState({ filter: null }))}
+								<FilterToggleLink
+									onClick={() => (this.state.filter !== "period" ? this.setState({ filter: "period" }) : this.setState({ filter: null }))}
+								>
+									periods
+								</FilterToggleLink>
+								<FilterToggleLink
+									onClick={() =>
+										this.state.filter !== "technique" ? this.setState({ filter: "technique" }) : this.setState({ filter: null })
+									}
+								>
+									technique
+								</FilterToggleLink>
+							</FiltersWrapper>
+							{this.showFilter(this.state.filter)}
+						</StyledCol>
+						<StyledCol md={12}>
+							<InfiniteScroll
+								pageStart={0}
+								loadMore={() => this.fetchNextImages()}
+								hasMore={this.state.next != null ? true : false}
+								loader={<Spinner animation="border" />}
 							>
-								periods
-							</FilterToggleLink>
-							<FilterToggleLink
-								onClick={() => (this.state.filter !== "technique" ? this.setState({ filter: "technique" }) : this.setState({ filter: null }))}
-							>
-								technique
-							</FilterToggleLink>
-						</FiltersWrapper>
-						{this.showFilter(this.state.filter)}
-					</StyledCol>
-					<StyledCol md={12}>
-						<InfiniteScroll
-							pageStart={0}
-							loadMore={() => this.fetchNextImages()}
-							hasMore={this.state.next != null ? true : false}
-							loader={<Spinner animation="border" />}
-						>
-							<Masonry breakpointCols={this.state.breakpointsColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
-								{this.state.imagesList.map((record) =>
-									record.images.length > 0 ? (
-										<GalleryItem showImage={this.showImage} image={record} url={record.primaryimageurl}></GalleryItem>
-									) : null
-								)}
-							</Masonry>
-						</InfiniteScroll>
-					</StyledCol>
-				</Row>
-			</Container>
+								<Masonry
+									breakpointCols={this.state.breakpointsColumnsObj}
+									className="my-masonry-grid"
+									columnClassName="my-masonry-grid_column"
+								>
+									{this.state.imagesList.map((record) =>
+										record.images.length > 0 ? (
+											<GalleryItem showImage={this.showImage} image={record} url={record.primaryimageurl}></GalleryItem>
+										) : null
+									)}
+								</Masonry>
+							</InfiniteScroll>
+						</StyledCol>
+					</Row>
+				</Container>
+			</div>
 		);
 	}
 }

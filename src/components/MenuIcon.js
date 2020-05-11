@@ -34,7 +34,7 @@ class MenuIcon extends React.Component {
 					from={{ opacity: 0 }}
 					enter={{ opacity: 1, position: "fixed" }}
 					leave={{ opacity: 0 }}
-					config={{ delay: 0, duration: 800 }}
+					config={{ delay: 0, duration: 400 }}
 				>
 					{(show) =>
 						show &&
@@ -47,9 +47,9 @@ class MenuIcon extends React.Component {
 				</Transition>
 
 				<div className="menu-icon" onClick={this.handleClick} style={this.state.display ? { display: "none" } : { display: "" }}>
-					<div className="mob-menu1"></div>
-					<div className="mob-menu2"></div>
-					<div className="mob-menu3"></div>
+					<div className={window.location.href === "http://localhost:3000/" ? "mob-menu1 white" : "mob-menu1"}></div>
+					<div className={window.location.href === "http://localhost:3000/" ? "mob-menu2 white" : "mob-menu2"}></div>
+					<div className={window.location.href === "http://localhost:3000/" ? "mob-menu3 white" : "mob-menu3"}></div>
 				</div>
 			</div>
 		);
