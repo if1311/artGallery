@@ -5,6 +5,7 @@ const StyledLi = styled.li`
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   padding: 10px;
   text-align: center;
+  list-style-type: none;
 
   &:hover {
     cursor: pointer;
