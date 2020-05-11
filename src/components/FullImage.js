@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Gallery.css";
 
 export default class FullImage extends Component {
 	render() {

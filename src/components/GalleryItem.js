@@ -5,14 +5,14 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 
 const GalleryItem = (props) => {
-  return (
-    <Container>
-      <Row>
-        <Col md={12}></Col>
-        <Image className="padded-image" src={props.url} fluid />
-      </Row>
-    </Container>
-  );
+	return (
+		<Container>
+			<Row>
+				<Col md={12}></Col>
+				<Image onClick={() => props.showImage(props.image)} className="padded-image" src={props.url} fluid />
+			</Row>
+		</Container>
+	);
 };
 
 export default GalleryItem;

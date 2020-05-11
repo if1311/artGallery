@@ -16,6 +16,9 @@ import { technique } from "./resources/technique";
 import { FilterToggleLink } from "./styled-components/FilterToggleLink";
 import { FiltersWrapper } from "./styled-components/FiltersWrapper";
 import Spinner from "react-bootstrap/Spinner";
+import "./Gallery.css";
+
+import FullImage from "./FullImage";
 
 const StyledCol = styled(Col)`
 	background-color: #ffffff;
@@ -41,6 +44,9 @@ export default class MGal extends Component {
 				768: 1,
 				576: 1,
 			},
+
+			imageDiv: false,
+			currentImage: null,
 		};
 		this.fetchNextImages = this.fetchNextImages.bind(this);
 		this.fetchImages = this.fetchImages.bind(this);
@@ -59,6 +65,14 @@ export default class MGal extends Component {
 				});
 			});
 	}
+
+	showImage = (image) => {
+		console.log(image);
+		this.setState({ imageDiv: !this.state.imageDiv, currentImage: image });
+		setTimeout(() => {
+			document.body.style.overflowY = this.state.imageDiv ? "hidden" : "scroll";
+		}, 10);
+	};
 
 	fetchImages() {
 		axios
@@ -135,6 +149,18 @@ export default class MGal extends Component {
 	render() {
 		return (
 			<Container>
+				{this.state.imageDiv && (
+					<FullImage
+						currentImage={this.state.currentImage.primaryimageurl}
+						name={this.state.currentImage.people ? this.state.currentImage.people[0].name : null}
+						title={this.state.currentImage.title}
+						date={this.state.currentImage.dated}
+						category={this.state.currentImage.classification}
+						technique={this.state.currentImage.technique}
+						culture={this.state.currentImage.culture}
+						showImage={this.showImage}
+					/>
+				)}
 				<Row>
 					{" "}
 					<StyledCol>
@@ -169,7 +195,9 @@ export default class MGal extends Component {
 						>
 							<Masonry breakpointCols={this.state.breakpointsColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
 								{this.state.imagesList.map((record) =>
-									record.images.length > 0 ? <GalleryItem url={record.primaryimageurl}></GalleryItem> : null
+									record.images.length > 0 ? (
+										<GalleryItem showImage={this.showImage} image={record} url={record.primaryimageurl}></GalleryItem>
+									) : null
 								)}
 							</Masonry>
 						</InfiniteScroll>
