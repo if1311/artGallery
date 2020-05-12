@@ -76,8 +76,12 @@
 	flex-direction: row;
 	justify-content: space-between;
 }
-@media (max-width: 500px) {
+@media (max-width: 576px) {
 	.menu-items ul li a {
 		font-size: 3.5em;
+	}
+
+	.nav-bar {
+		background: white;
 	}
 }

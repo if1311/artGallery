@@ -10,21 +10,22 @@
 .mob-menu1,
 .mob-menu2,
 .mob-menu3 {
-	width: 40px;
+	width: 50px;
 	height: 3px;
 	background-color: #353535;
-	margin: 6px;
+	margin: 8px;
+
 	transition: transform 700ms;
 }
 
 .mob-menu2 {
-	width: 30px;
+	width: 40px;
 	position: relative;
 	left: 10px;
 }
 
 .mob-menu3 {
-	width: 20px;
+	width: 30px;
 	position: relative;
 	left: 20px;
 }

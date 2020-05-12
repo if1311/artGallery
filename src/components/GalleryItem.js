@@ -8,8 +8,13 @@ const GalleryItem = (props) => {
 	return (
 		<Container>
 			<Row>
-				<Col md={12}></Col>
-				<Image onClick={() => props.showImage(props.image)} className="padded-image" src={props.url} fluid />
+				<Col md={12}>
+					<Image onClick={() => props.showImage(props.image)} id="imageId" className="padded-image" src={props.url} fluid />
+					<div className="imageDetails">
+						<h5>{props.image.title}</h5>
+						<h6>{props.image.classification}</h6>
+					</div>
+				</Col>
 			</Row>
 		</Container>
 	);

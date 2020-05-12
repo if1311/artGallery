@@ -1,7 +1,6 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-
 import Modal from "react-bootstrap/Modal";
 import ModalTitle from "react-bootstrap/ModalTitle";
 import ModalHeader from "react-bootstrap/ModalHeader";
@@ -14,27 +13,13 @@ import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroller";
 import NavBar from "./NavBar";
 
-const StyledUl = styled.ul`
+const StyledArtistList = styled.ul`
 	border: 0;
-	list-style-type: disc;
+	list-style-type: none;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	word-wrap: break-word;
-`;
-
-const StyledRow = styled(Row)`
-	display: flex;
-	flex-flow: row-reverse nowrap;
-	justify-content: space-between;
-`;
-
-const PagButton = styled.button`
-	border: 0;
-	background-color: #ffffff;
-	border-radius: 0;
-	&:hover {
-		color: gray;
-	}
+	font-size: 1.3em;
 `;
 
 class ArtistList extends React.Component {
@@ -94,12 +79,13 @@ class ArtistList extends React.Component {
 
 	fetchNextPage() {
 		console.log(this.state.next);
+
 		axios
 			.get(this.state.next)
 			.then((res) => res.data)
 			.then((response) =>
 				this.setState({
-					artists: response.records,
+					artists: [...this.state.artists, ...response.records],
 					next: response.info.next,
 					prev: response.info.prev,
 				})
@@ -124,10 +110,10 @@ class ArtistList extends React.Component {
 				<NavBar />
 
 				<Container>
-					<h1>ARTISTS</h1>
-					<div className="search">
-						<input type="search" placeholder="Search" onChange={this.onSearchChange}></input>
-					</div>
+					<h1>Artists</h1>
+
+					<input type="search" className="search artistSearch" placeholder="Search" onChange={this.onSearchChange}></input>
+
 					<Modal
 						show={this.state.isModalOpen}
 						onHide={this.closeModal}
@@ -147,13 +133,15 @@ class ArtistList extends React.Component {
 						</ModalBody>
 					</Modal>
 					<Row className="ArtistList">
-						<StyledUl>
-							<InfiniteScroll
-								pageStart={0}
-								loadMore={() => this.fetchNextPage()}
-								hasMore={this.state.next != null ? true : false}
-								loader={<Spinner animation="border"></Spinner>}
-							>
+						<InfiniteScroll
+							className="infinite-scroll"
+							pageStart={0}
+							loadMore={() => this.fetchNextPage()}
+							hasMore={this.state.next != null ? true : false}
+							loader={<Spinner animation="border"></Spinner>}
+							threshold={0}
+						>
+							<StyledArtistList>
 								{this.state.artists
 									.sort((a, b) => a.alphasort && a.alphasort.localeCompare(b.alphasort))
 									.filter((item) => {
@@ -169,8 +157,8 @@ class ArtistList extends React.Component {
 											</li>
 										);
 									})}
-							</InfiniteScroll>
-						</StyledUl>
+							</StyledArtistList>
+						</InfiniteScroll>
 					</Row>
 				</Container>
 			</div>

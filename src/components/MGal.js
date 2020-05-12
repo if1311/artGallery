@@ -49,6 +49,7 @@ export default class MGal extends Component {
 			imageDiv: false,
 			currentImage: null,
 			searchField: "",
+			toggleFilters: false,
 		};
 		this.fetchNextImages = this.fetchNextImages.bind(this);
 		this.fetchImages = this.fetchImages.bind(this);
@@ -173,32 +174,44 @@ export default class MGal extends Component {
 					<Row>
 						{" "}
 						<StyledCol>
-							<div className="search">
-								<input type="search" placeholder="Search" onChange={this.onSearchChange}></input>
-							</div>
-							<FiltersWrapper>
-								<FilterToggleLink
-									onClick={() =>
-										this.state.filter !== "classification" ? this.setState({ filter: "classification" }) : this.setState({ filter: null })
-									}
-								>
-									classification
-								</FilterToggleLink>
+							<div className="searchButton">
+								<input type="search" className="search" placeholder="Search" onChange={this.onSearchChange}></input>
 
-								<FilterToggleLink
-									onClick={() => (this.state.filter !== "period" ? this.setState({ filter: "period" }) : this.setState({ filter: null }))}
-								>
-									periods
-								</FilterToggleLink>
-								<FilterToggleLink
-									onClick={() =>
-										this.state.filter !== "technique" ? this.setState({ filter: "technique" }) : this.setState({ filter: null })
-									}
-								>
-									technique
-								</FilterToggleLink>
-							</FiltersWrapper>
-							{this.showFilter(this.state.filter)}
+								<button onClick={() => this.setState({ toggleFilters: !this.state.toggleFilters })} className="filtersButton">
+									Advanced
+								</button>
+							</div>
+							{this.state.toggleFilters && (
+								<div>
+									<FiltersWrapper>
+										<FilterToggleLink
+											onClick={() =>
+												this.state.filter !== "classification"
+													? this.setState({ filter: "classification" })
+													: this.setState({ filter: null })
+											}
+										>
+											Classification
+										</FilterToggleLink>
+
+										<FilterToggleLink
+											onClick={() =>
+												this.state.filter !== "period" ? this.setState({ filter: "period" }) : this.setState({ filter: null })
+											}
+										>
+											Periods
+										</FilterToggleLink>
+										<FilterToggleLink
+											onClick={() =>
+												this.state.filter !== "technique" ? this.setState({ filter: "technique" }) : this.setState({ filter: null })
+											}
+										>
+											Technique
+										</FilterToggleLink>
+									</FiltersWrapper>
+									{this.showFilter(this.state.filter)}
+								</div>
+							)}
 						</StyledCol>
 						<StyledCol md={12}>
 							<InfiniteScroll

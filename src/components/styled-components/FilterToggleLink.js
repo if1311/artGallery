@@ -5,4 +5,7 @@ export const FilterToggleLink = styled.li`
 	/* top: 20%; */
 	border: none;
 	cursor: pointer;
+	color: #353535;
+	font-size: 1.3em;
+	margin-left: 150px;
 `;

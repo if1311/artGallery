@@ -15,9 +15,17 @@ h4 {
 .ArtistList ul {
 	margin-bottom: 0;
 }
+
+.artistSearch {
+	margin-bottom: 50px;
+	margin-top: 50px;
+	width: 90%;
+}
+
 .ArtistList ul li {
 	cursor: pointer;
-	margin: 10px 15px;
+	margin: 15px 15px;
+	margin-right: 50px;
 }
 .modal-detail {
 	width: 90vw !important;

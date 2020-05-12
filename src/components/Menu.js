@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 class Menu extends React.Component {
 	render() {
-		const menuArr = ["Home", "Gallery", "Artists", "Contact"];
-		const linkArr = ["/", "/gallery", "/artists", "/contact"];
+		const menuArr = ["Home", "Gallery", "Artists"];
+		const linkArr = ["/", "/gallery", "/artists"];
 
 		return (
 			<div className="menu-container" style={{ display: this.props.display ? "block" : "hidden" }}>
