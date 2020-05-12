@@ -48,6 +48,7 @@ export default class MGal extends Component {
 
 			imageDiv: false,
 			currentImage: null,
+			searchField: "",
 		};
 		this.fetchNextImages = this.fetchNextImages.bind(this);
 		this.fetchImages = this.fetchImages.bind(this);
@@ -66,6 +67,10 @@ export default class MGal extends Component {
 				});
 			});
 	}
+
+	onSearchChange = (event) => {
+		this.setState({ searchField: event.target.value });
+	};
 
 	showImage = (image) => {
 		console.log(image);
@@ -136,7 +141,7 @@ export default class MGal extends Component {
 
 	componentDidMount() {
 		axios
-			.get(`https://api.harvardartmuseums.org/object?size=20&page=1&apikey=${this.state.apikey}&hasimage=1`)
+			.get(`https://api.harvardartmuseums.org/object?size=20&page=123&apikey=${this.state.apikey}&hasimage=1`)
 			.then((res) => res.data)
 			.then((data) => {
 				this.setState({
@@ -152,6 +157,7 @@ export default class MGal extends Component {
 			<div>
 				<NavBar />
 				<Container>
+					<h1>Gallery</h1>
 					{this.state.imageDiv && (
 						<FullImage
 							currentImage={this.state.currentImage.primaryimageurl}
@@ -167,6 +173,9 @@ export default class MGal extends Component {
 					<Row>
 						{" "}
 						<StyledCol>
+							<div className="search">
+								<input type="search" placeholder="Search" onChange={this.onSearchChange}></input>
+							</div>
 							<FiltersWrapper>
 								<FilterToggleLink
 									onClick={() =>
@@ -203,11 +212,18 @@ export default class MGal extends Component {
 									className="my-masonry-grid"
 									columnClassName="my-masonry-grid_column"
 								>
-									{this.state.imagesList.map((record) =>
-										record.images.length > 0 ? (
-											<GalleryItem showImage={this.showImage} image={record} url={record.primaryimageurl}></GalleryItem>
-										) : null
-									)}
+									{this.state.imagesList
+										.filter((item) => {
+											return (
+												this.state.searchField === "" ||
+												item.title.toLocaleLowerCase().includes(this.state.searchField.toLocaleLowerCase())
+											);
+										})
+										.map((record) =>
+											record.images.length > 0 ? (
+												<GalleryItem showImage={this.showImage} image={record} url={record.primaryimageurl}></GalleryItem>
+											) : null
+										)}
 								</Masonry>
 							</InfiniteScroll>
 						</StyledCol>

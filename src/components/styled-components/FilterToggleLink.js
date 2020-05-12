@@ -5,5 +5,4 @@ export const FilterToggleLink = styled.li`
 	/* top: 20%; */
 	border: none;
 	cursor: pointer;
-	margin-top: 150px;
 `;

@@ -7,6 +7,7 @@ import axios from "axios";
 import ArtistDetails from "./ArtistDetails";
 import "./ArtistList.css";
 import Masonry from "react-masonry-css";
+import FullImage from "./FullImage";
 
 class ArtistModal extends React.Component {
 	constructor(props) {
@@ -21,6 +22,8 @@ class ArtistModal extends React.Component {
 				768: 1,
 				576: 1,
 			},
+			currentImage: null,
+			imageDiv: false,
 		};
 	}
 	componentDidMount() {
@@ -42,9 +45,29 @@ class ArtistModal extends React.Component {
 			});
 	}
 
+	showImage = (image) => {
+		console.log(image);
+		this.setState({ imageDiv: !this.state.imageDiv, currentImage: image });
+		setTimeout(() => {
+			document.body.style.overflowY = this.state.imageDiv ? "hidden" : "scroll";
+		}, 10);
+	};
+
 	render() {
 		return (
 			<Container>
+				{this.state.imageDiv && (
+					<FullImage
+						currentImage={this.state.currentImage.primaryimageurl}
+						name={this.state.currentImage.people ? this.state.currentImage.people[0].name : null}
+						title={this.state.currentImage.title}
+						date={this.state.currentImage.dated}
+						category={this.state.currentImage.classification}
+						technique={this.state.currentImage.technique}
+						culture={this.state.currentImage.culture}
+						showImage={this.showImage}
+					/>
+				)}
 				<ArtistDetails name={this.props.currentArtistName} date={this.props.currentArtistDate} />
 				<Row className="ArtistWorks">
 					<Col md={12} xl={12} lg={12}>
@@ -60,7 +83,12 @@ class ArtistModal extends React.Component {
 										<Container key={work.id}>
 											<Row>
 												<Col md={12}>
-													<Image fluid className="img padded-image" src={work.primaryimageurl} />
+													<Image
+														onClick={() => this.showImage(work)}
+														fluidprops
+														className="img artistImage padded-image"
+														src={work.primaryimageurl}
+													/>
 												</Col>
 											</Row>
 										</Container>

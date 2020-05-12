@@ -7,10 +7,12 @@ import ModalTitle from "react-bootstrap/ModalTitle";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalBody from "react-bootstrap/ModalBody";
 import ArtistModal from "./ArtistModal";
-// import Modal from "react-modal";
+import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
 import "./ArtistList.css";
 import styled from "styled-components";
+import InfiniteScroll from "react-infinite-scroller";
+import NavBar from "./NavBar";
 
 const StyledUl = styled.ul`
 	border: 0;
@@ -46,6 +48,7 @@ class ArtistList extends React.Component {
 			currentArtistDate: null,
 			next: null,
 			prev: null,
+			searchField: "",
 		};
 		this.fetchNextPage = this.fetchNextPage.bind(this);
 		this.fetchPrevPage = this.fetchPrevPage.bind(this);
@@ -57,6 +60,11 @@ class ArtistList extends React.Component {
 			isModalOpen: false,
 		});
 	};
+
+	onSearchChange = (event) => {
+		this.setState({ searchField: event.target.value });
+	};
+
 	openModal = (id, name, date) => {
 		console.log("opening modal");
 		console.log(name, date);
@@ -97,6 +105,7 @@ class ArtistList extends React.Component {
 				})
 			);
 	}
+
 	fetchPrevPage() {
 		axios
 			.get(this.state.prev)
@@ -111,50 +120,60 @@ class ArtistList extends React.Component {
 	}
 	render() {
 		return (
-			<Container>
-				<h1>ARTISTS</h1>
-				{/* <Modal ariaHideApp={false} isOpen={this.state.isModalOpen}>
-          <div className="closemodal">
-            <button onClick={this.closeModal}>X</button>
-          </div>
-          <ArtistPopUp />
-        </Modal> */}
-				<Modal
-					show={this.state.isModalOpen}
-					onHide={this.closeModal}
-					dialogClassName="modal-detail"
-					aria-labelledby="artist-details"
-					scrollable={true}
-				>
-					<ModalHeader closeButton>
-						<ModalTitle id="artist-details">Artist Details</ModalTitle>
-					</ModalHeader>
-					<ModalBody fluid>
-						<ArtistModal
-							currentArtistID={this.state.currentArtistID}
-							currentArtistName={this.state.currentArtistName}
-							currentArtistDate={this.state.currentArtistDate}
-						/>
-					</ModalBody>
-				</Modal>
-				<Row className="ArtistList">
-					<StyledUl>
-						{this.state.artists
-							.sort((a, b) => a.alphasort && a.alphasort.localeCompare(b.alphasort))
-							.map((artist) => {
-								return (
-									<li onClick={() => this.openModal(artist.id, artist.displayname, artist.displaydate)} key={artist.id}>
-										{artist.displayname}
-									</li>
-								);
-							})}
-					</StyledUl>
-				</Row>
-				<StyledRow>
-					{this.state.next ? <PagButton onClick={this.fetchNextPage}>Next Page</PagButton> : null}
-					{this.state.prev ? <PagButton onClick={this.fetchPrevPage}>Previous Page</PagButton> : null}
-				</StyledRow>
-			</Container>
+			<div>
+				<NavBar />
+
+				<Container>
+					<h1>ARTISTS</h1>
+					<div className="search">
+						<input type="search" placeholder="Search" onChange={this.onSearchChange}></input>
+					</div>
+					<Modal
+						show={this.state.isModalOpen}
+						onHide={this.closeModal}
+						dialogClassName="modal-detail"
+						aria-labelledby="artist-details"
+						scrollable={true}
+					>
+						<ModalHeader closeButton>
+							<ModalTitle id="artist-details">Artist Details</ModalTitle>
+						</ModalHeader>
+						<ModalBody fluid>
+							<ArtistModal
+								currentArtistID={this.state.currentArtistID}
+								currentArtistName={this.state.currentArtistName}
+								currentArtistDate={this.state.currentArtistDate}
+							/>
+						</ModalBody>
+					</Modal>
+					<Row className="ArtistList">
+						<StyledUl>
+							<InfiniteScroll
+								pageStart={0}
+								loadMore={() => this.fetchNextPage()}
+								hasMore={this.state.next != null ? true : false}
+								loader={<Spinner animation="border"></Spinner>}
+							>
+								{this.state.artists
+									.sort((a, b) => a.alphasort && a.alphasort.localeCompare(b.alphasort))
+									.filter((item) => {
+										return (
+											this.state.searchField === "" ||
+											item.displayname.toLocaleLowerCase().includes(this.state.searchField.toLocaleLowerCase())
+										);
+									})
+									.map((artist) => {
+										return (
+											<li onClick={() => this.openModal(artist.id, artist.displayname, artist.displaydate)} key={artist.id}>
+												{artist.displayname}
+											</li>
+										);
+									})}
+							</InfiniteScroll>
+						</StyledUl>
+					</Row>
+				</Container>
+			</div>
 		);
 	}
 }

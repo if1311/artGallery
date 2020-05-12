@@ -1,57 +1,61 @@
 .ArtistList {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 h1 {
-  border-bottom: 1px solid gray;
-  margin: 2% 2%;
-  text-align: center;
+	border-bottom: 1px solid gray;
+	margin: 2% 2%;
+	text-align: center;
 }
 
 h4 {
-  margin: 2% 2%;
-  text-align: center;
+	margin: 2% 2%;
+	text-align: center;
 }
 .ArtistList ul {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 .ArtistList ul li {
-  cursor: pointer;
-  margin: 10px 15px;
+	cursor: pointer;
+	margin: 10px 15px;
 }
 .modal-detail {
-  width: 90vw !important;
-  max-width: 90vw !important;
+	width: 90vw !important;
+	max-width: 90vw !important;
 }
 
 /* .ArtistWorks img {
   max-height: 15vh;
 } */
 .img {
-  margin: 20px;
+	margin: 20px;
 }
 .date {
-  text-align: center;
+	text-align: center;
+}
+
+.artistImage {
+	width: 100%;
 }
 
 .artist-masonry-grid {
-  display: -webkit-box; /* Not needed if autoprefixing */
-  display: -ms-flexbox; /* Not needed if autoprefixing */
-  display: flex;
-  margin-left: -30px; /* gutter size offset */
-  width: auto;
+	display: -webkit-box; /* Not needed if autoprefixing */
+	display: -ms-flexbox; /* Not needed if autoprefixing */
+	display: flex;
+	margin-left: -30px; /* gutter size offset */
+	width: auto;
 }
 .artist-masonry-grid_column {
-  padding-left: 5px; /* gutter size */
-  background-clip: padding-box;
+	padding-left: 5px; /* gutter size */
+	background-clip: padding-box;
 }
 
 /* Style your items */
 .artist-masonry-grid_column > div {
-  /* change div to reference your elements you put in <Masonry> */
-  background: rgb(255, 255, 255);
-  margin-bottom: 30px;
+	/* change div to reference your elements you put in <Masonry> */
+	background: rgb(255, 255, 255);
+	margin-bottom: 30px;
 }
 .padded-image {
-  padding: 10%;
+	padding: 10%;
 }
