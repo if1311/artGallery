@@ -1,0 +1,11 @@
+.logo {
+	display: inline-block;
+	margin-left: 10px;
+	width: 150px;
+}
+
+@media (max-width: 500px) {
+	.logo {
+		width: 100px;
+	}
+}
