@@ -6,7 +6,7 @@ class Carousel extends React.Component {
 		this.state = {
 			activeID: 0,
 			wrapperStyle: {
-				backgroundImage: 'url("../images/the-girl-with-a-pearl-earring.jpg")',
+				backgroundImage: window.innerWidth >= 650 ? 'url("../images/bird-king2.jpg")' : 'url("../images/bird-king.jpg")',
 			},
 			panelStyle: {
 				background: this.props.data[0].colour,
@@ -24,7 +24,8 @@ class Carousel extends React.Component {
 				this.setState({
 					activeID: futureActiveId,
 					wrapperStyle: {
-						backgroundImage: `url('${this.props.data[futureActiveId].img}')`,
+						backgroundImage:
+							window.innerWidth >= 650 ? `url('${this.props.data[futureActiveId].img}')` : `url('${this.props.data[futureActiveId].mobileImg}')`,
 					},
 					panelStyle: {
 						background: this.props.data[futureActiveId].colour,
@@ -48,7 +49,7 @@ class Carousel extends React.Component {
 		this.setState({
 			activeID: id,
 			wrapperStyle: {
-				backgroundImage: `url('${this.props.data[id].img}')`,
+				backgroundImage: window.innerWidth >= 650 ? `url('${this.props.data[id].img}')` : `url('${this.props.data[id].mobileImg}')`,
 			},
 			panelStyle: {
 				backgroundColor: this.props.data[id].colour,

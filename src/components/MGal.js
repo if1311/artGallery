@@ -142,7 +142,7 @@ export default class MGal extends Component {
 
 	componentDidMount() {
 		axios
-			.get(`https://api.harvardartmuseums.org/object?size=20&page=123&apikey=${this.state.apikey}&hasimage=1`)
+			.get(`https://api.harvardartmuseums.org/object/?size=20&page=1&apikey=221b4e10-7bc5-11ea-8865-8f439f2941d8&sort=totalpageviews&sortorder=desc`)
 			.then((res) => res.data)
 			.then((data) => {
 				this.setState({
@@ -215,10 +215,11 @@ export default class MGal extends Component {
 						</StyledCol>
 						<StyledCol md={12}>
 							<InfiniteScroll
+								className="infinite-scroll-gallery"
 								pageStart={0}
 								loadMore={() => this.fetchNextImages()}
 								hasMore={this.state.next != null ? true : false}
-								loader={<Spinner animation="border" />}
+								loader={<Spinner animation="border" className="spinner2" />}
 							>
 								<Masonry
 									breakpointCols={this.state.breakpointsColumnsObj}

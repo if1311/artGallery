@@ -45,6 +45,10 @@
 	z-index: 10;
 }
 
+#transparent {
+	background: none;
+}
+
 /***************** Hover-anim ***************/
 
 /* .menu-icon:hover {

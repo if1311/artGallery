@@ -22,6 +22,7 @@
 	align-items: center;
 	z-index: 1;
 }
+
 .selector {
 	border: 1px solid white;
 	background: none;
@@ -32,6 +33,10 @@
 	opacity: 0.6;
 	cursor: pointer;
 	transition: background 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.wrapper {
+	overflow-y: hidden;
 }
 
 .selector:hover {
@@ -133,4 +138,23 @@ aside.panel button.panel-button:focus {
 		margin: 3px;
 		padding: 1rem 1rem;
 	}
+
+	aside.panel h2.panel-artist {
+		font-size: 2em;
+		margin-top: 50px;
+	}
+	aside.panel p.panel-title {
+		font-size: 1.2em;
+		text-align: center;
+	}
 }
+
+/* @media (max-width: 500px) {
+	aside.panel h2.panel-artist {
+		font-size: 2em;
+		margin-top: 50px;
+	}
+	aside.panel p.panel-title {
+		font-size: 1.5em;
+	}
+} */

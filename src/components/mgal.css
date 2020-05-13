@@ -16,15 +16,23 @@
 	background: rgb(255, 255, 255);
 	margin-bottom: 30px;
 }
-.padded-image {
-	/* padding: 10%; */
-	padding-bottom: 0px;
+
+.spinner2 {
+	align-self: center;
 }
 
-.imageDetails {
-	/* text-align: center; */
-	margin-left: 30px;
-	padding-right: 30px;
+.padded-image {
+	/* padding: 10%; */
+
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.infinite-scroll {
+	text-align: center;
+}
+
+.infinite-scroll-gallery {
+	text-align: center;
 }
 
 .imageDetails h5 {
@@ -36,8 +44,12 @@
 	color: #7c7c7c;
 }
 
+.imageDetails {
+	text-align: left;
+}
+
 #imageId {
-	padding-bottom: 5px;
+	padding: 0px;
 }
 
 @media (max-width: 576px) {

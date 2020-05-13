@@ -12,7 +12,8 @@ const GalleryItem = (props) => {
 					<Image onClick={() => props.showImage(props.image)} id="imageId" className="padded-image" src={props.url} fluid />
 					<div className="imageDetails">
 						<h5>{props.image.title}</h5>
-						<h6>{props.image.classification}</h6>
+						{/* <h6>{props.image.classification}</h6> */}
+						<h6>{props.image.people !== undefined ? props.image.people[0].name : "Unknown Artist"}</h6>
 					</div>
 				</Col>
 			</Row>

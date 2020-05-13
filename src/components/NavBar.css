@@ -2,4 +2,8 @@
 	.nav-bar {
 		background: white;
 	}
+
+	#transparent {
+		background: none;
+	}
 }

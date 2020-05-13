@@ -14,8 +14,13 @@ export default class FullImage extends Component {
 
 				<div className="fullContainer">
 					<div className="imageDiv">
-						<a href={this.props.currentImage}>
-							<img className="highlightImg" alt="idk" src={this.props.currentImage && this.props.currentImage}></img>
+						<a href={this.props.currentImage} target="_blank" rel="noopener noreferrer">
+							<img
+								className="highlightImg"
+								title="Open image in new tab."
+								alt="idk"
+								src={this.props.currentImage && this.props.currentImage}
+							></img>
 						</a>
 					</div>
 					<div className="descriptionDiv">

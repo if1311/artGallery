@@ -19,7 +19,15 @@ const StyledArtistList = styled.ul`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	word-wrap: break-word;
+	text-align: center;
 	font-size: 1.3em;
+
+	@media (max-width: 1200px) {
+		grid-template-columns: 1fr 1fr;
+	}
+	@media (max-width: 768px) {
+		grid-template-columns: 1fr;
+	}
 `;
 
 class ArtistList extends React.Component {

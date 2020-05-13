@@ -25,7 +25,7 @@ class MenuIcon extends React.Component {
 
 	render() {
 		return (
-			<div className="nav-bar">
+			<div className="nav-bar" id={window.location.href === "http://localhost:3000/" && "transparent"}>
 				<Logo display={this.state.display} />
 				<Transition
 					// native
