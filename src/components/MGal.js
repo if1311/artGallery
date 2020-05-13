@@ -182,7 +182,7 @@ export default class MGal extends Component {
 								</button>
 							</div>
 							{this.state.toggleFilters && (
-								<div>
+								<>
 									<FiltersWrapper>
 										<FilterToggleLink
 											onClick={() =>
@@ -210,7 +210,7 @@ export default class MGal extends Component {
 										</FilterToggleLink>
 									</FiltersWrapper>
 									{this.showFilter(this.state.filter)}
-								</div>
+								</>
 							)}
 						</StyledCol>
 						<StyledCol md={12}>

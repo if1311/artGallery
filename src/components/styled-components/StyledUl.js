@@ -12,6 +12,13 @@ export const StyledUl = styled.ul`
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	background: #f5f5f5;
 
+	@media (max-width: 1000px) {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+	@media (max-width: 750px) {
+		grid-template-columns: 1fr 1fr;
+	}
+
 	overflow-x: hidden;
 	&::-webkit-scrollbar {
 		width: 0.3em;

@@ -12,6 +12,10 @@ const StyledLi = styled.li`
 		cursor: pointer;
 		color: #7c7c7c;
 	}
+
+	@media (max-width: 750px) {
+		margin-left: 10px;
+	}
 `;
 
 export default function FilterItem(props) {
