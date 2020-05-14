@@ -268,7 +268,7 @@ export default class MGal extends Component {
                       );
                     })
                     .map((record) =>
-                      record.images.length > 0 ? (
+                      record.images && record.images.length > 0 ? (
                         <GalleryItem
                           showImage={this.showImage}
                           image={record}
