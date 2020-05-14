@@ -66,7 +66,8 @@ export default class MGal extends Component {
 					next: data.info.next,
 					prev: data.info.prev,
 				});
-			});
+			})
+			.catch((err) => console.log(err));
 	}
 
 	onSearchChange = (event) => {
@@ -74,7 +75,6 @@ export default class MGal extends Component {
 	};
 
 	showImage = (image) => {
-		console.log(image);
 		this.setState({ imageDiv: !this.state.imageDiv, currentImage: image });
 		setTimeout(() => {
 			document.body.style.overflowY = this.state.imageDiv ? "hidden" : "scroll";
@@ -109,7 +109,6 @@ export default class MGal extends Component {
 	}
 
 	showFilter(filter) {
-		console.log("clicked");
 		switch (filter) {
 			case "classification":
 				return (
@@ -154,6 +153,33 @@ export default class MGal extends Component {
 			});
 	}
 
+	searchApiCall = () => {
+		if (this.state.searchField.length >= 1) {
+			this.setState({ imagesList: [], next: null });
+			axios
+				.get(`https://api.harvardartmuseums.org/object/?size=100&page=1&apikey=${this.state.apikey}&keyword=${this.state.searchField}`)
+				.then((res) => res.data)
+				.then((data) => {
+					this.setState({
+						imagesList: data.records,
+						next: null,
+						prev: data.info.prev,
+					});
+				});
+		} else {
+			axios
+				.get(`https://api.harvardartmuseums.org/object/?size=20&page=1&apikey=${this.state.apikey}&sort=totalpageviews&sortorder=desc`)
+				.then((res) => res.data)
+				.then((data) => {
+					this.setState({
+						imagesList: data.records,
+						next: data.info.next,
+						prev: data.info.prev,
+					});
+				});
+		}
+	};
+
 	render() {
 		return (
 			<div>
@@ -175,10 +201,18 @@ export default class MGal extends Component {
 					<Row>
 						{" "}
 						<StyledCol>
-							<div className="searchButton">
+							<div className="searchButton flexWrap">
 								<input type="search" className="search" placeholder="Search by title" onChange={this.onSearchChange}></input>
 
-								<button onClick={() => this.setState({ toggleFilters: !this.state.toggleFilters })} className="filtersButton">
+								<button onClick={this.searchApiCall} className="filtersButton">
+									Search
+								</button>
+
+								<button
+									id="advancedButton"
+									onClick={() => this.setState({ toggleFilters: !this.state.toggleFilters })}
+									className="filtersButton"
+								>
 									Advanced
 								</button>
 							</div>
@@ -227,18 +261,11 @@ export default class MGal extends Component {
 									className="my-masonry-grid"
 									columnClassName="my-masonry-grid_column"
 								>
-									{this.state.imagesList
-										.filter((item) => {
-											return (
-												this.state.searchField === "" ||
-												item.title.toLocaleLowerCase().includes(this.state.searchField.toLocaleLowerCase())
-											);
-										})
-										.map((record) =>
-											record.images && record.images.length > 0 ? (
-												<GalleryItem showImage={this.showImage} image={record} url={record.primaryimageurl}></GalleryItem>
-											) : null
-										)}
+									{this.state.imagesList.map((record) =>
+										record.images && record.images.length > 0 ? (
+											<GalleryItem showImage={this.showImage} image={record} url={record.primaryimageurl}></GalleryItem>
+										) : null
+									)}
 								</Masonry>
 							</InfiniteScroll>
 						</StyledCol>
@@ -248,3 +275,10 @@ export default class MGal extends Component {
 		);
 	}
 }
+
+// .filter((item) => {
+// 	return (
+// 		this.state.searchField === "" ||
+// 		item.title.toLocaleLowerCase().includes(this.state.searchField.toLocaleLowerCase())
+// 	);
+// })
