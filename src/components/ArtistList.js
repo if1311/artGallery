@@ -154,7 +154,7 @@ class ArtistList extends React.Component {
               loadMore={() => this.fetchNextPage()}
               hasMore={this.state.next != null ? true : false}
               loader={<Spinner animation="border"></Spinner>}
-              threshold={0}
+              threshold={1}
             >
               <StyledArtistList>
                 {this.state.artists
