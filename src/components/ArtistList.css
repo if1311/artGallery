@@ -3,9 +3,10 @@
   justify-content: center;
 }
 h1 {
-  border-bottom: 1px solid gray;
+  /* border-bottom: 1px solid gray; */
   margin: 2% 2%;
   text-align: center;
+  letter-spacing: 5px;
 }
 
 h4 {

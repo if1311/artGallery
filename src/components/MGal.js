@@ -229,7 +229,7 @@ export default class MGal extends Component {
                           : this.setState({ filter: null })
                       }
                     >
-                      Periods
+                      Period
                     </FilterToggleLink>
                     <FilterToggleLink
                       onClick={() =>
