@@ -8,5 +8,4 @@ export const FilterToggleLink = styled.li`
   color: #353535;
   font-size: 1.3em;
   margin-left: 10%;
-  /* margin-bottom: 2.5%; */
 `;
