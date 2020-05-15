@@ -11,7 +11,7 @@ class Logo extends React.Component {
 					<img
 						className="logo"
 						src={
-							this.props.white || window.location.href === "https://github.com/WildCodeSchool/bucharest-project2-art-gallery/"
+							this.props.white || window.location.href === "https://wildcodeschool.github.io/bucharest-project2-art-gallery/"
 								? require("../logos/logo_transparent_white.png")
 								: require("../logos/logo_transparent.png")
 						}

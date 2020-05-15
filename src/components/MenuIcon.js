@@ -49,17 +49,17 @@ class MenuIcon extends React.Component {
 				<div className="menu-icon" onClick={this.handleClick} style={this.state.display ? { display: "none" } : { display: "" }}>
 					<div
 						className={
-							window.location.href === "https://github.com/WildCodeSchool/bucharest-project2-art-gallery/" ? "mob-menu1 white" : "mob-menu1"
+							window.location.href === "https://wildcodeschool.github.io/bucharest-project2-art-gallery/" ? "mob-menu1 white" : "mob-menu1"
 						}
 					></div>
 					<div
 						className={
-							window.location.href === "https://github.com/WildCodeSchool/bucharest-project2-art-gallery/" ? "mob-menu2 white" : "mob-menu2"
+							window.location.href === "https://wildcodeschool.github.io/bucharest-project2-art-gallery/" ? "mob-menu2 white" : "mob-menu2"
 						}
 					></div>
 					<div
 						className={
-							window.location.href === "https://github.com/WildCodeSchool/bucharest-project2-art-gallery/" ? "mob-menu3 white" : "mob-menu3"
+							window.location.href === "https://wildcodeschool.github.io/bucharest-project2-art-gallery/" ? "mob-menu3 white" : "mob-menu3"
 						}
 					></div>
 				</div>
