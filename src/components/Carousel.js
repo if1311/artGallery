@@ -40,7 +40,10 @@ class Carousel extends React.Component {
 			this.setState({
 				activeID: 0,
 				wrapperStyle: {
-					backgroundImage: `url('${process.env.PUBLIC_URL + this.props.data[0].img}')`,
+					backgroundImage:
+						window.innerWidth >= 650
+							? `url('${process.env.PUBLIC_URL + this.props.data[0].img}')`
+							: `url('${process.env.PUBLIC_URL + this.props.data[0].mobileImg}')`,
 				},
 				panelStyle: {
 					background: this.props.data[0].colour,
