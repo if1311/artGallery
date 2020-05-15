@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Mgal from "./components/MGal";
+import "./App.css";
+import ArtistList from "./components/ArtistList";
+import { Switch, Route } from "react-router-dom";
+
+import Homepage from "./components/Homepage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Switch>
+        <Route exact path="/" component={Homepage} />
+
+        <Route path="/gallery" component={Mgal} />
+
+        <Route path="/artists" component={ArtistList} />
+      </Switch>
     </div>
   );
 }
-
 export default App;
