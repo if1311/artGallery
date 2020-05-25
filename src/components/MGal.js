@@ -23,6 +23,7 @@ import FullImage from "./FullImage";
 
 const StyledCol = styled(Col)`
 	background-color: #ffffff;
+	width: 100%;
 `;
 
 export default class MGal extends Component {

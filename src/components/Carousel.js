@@ -7,10 +7,7 @@ class Carousel extends React.Component {
 			timer: 3000,
 			activeID: 0,
 			wrapperStyle: {
-				backgroundImage:
-					window.innerWidth >= 650
-						? `url(${process.env.PUBLIC_URL + "/images/bird-king2.jpg"})`
-						: `url(${process.env.PUBLIC_URL + "/images/bird-king.jpg"})`,
+				backgroundImage: window.innerWidth >= 650 ? `url("https://i.imgur.com/U14xxzn.jpg")` : `url("https://i.imgur.com/nZIOfkW.jpg")`,
 			},
 			panelStyle: {
 				background: this.props.data[0].colour,
@@ -28,9 +25,7 @@ class Carousel extends React.Component {
 				activeID: futureActiveId,
 				wrapperStyle: {
 					backgroundImage:
-						window.innerWidth >= 650
-							? `url('${process.env.PUBLIC_URL + this.props.data[futureActiveId].img}')`
-							: `url('${process.env.PUBLIC_URL + this.props.data[futureActiveId].mobileImg}')`,
+						window.innerWidth >= 650 ? `url('${this.props.data[futureActiveId].img}')` : `url('${this.props.data[futureActiveId].mobileImg}')`,
 				},
 				panelStyle: {
 					background: this.props.data[futureActiveId].colour,
@@ -40,10 +35,7 @@ class Carousel extends React.Component {
 			this.setState({
 				activeID: 0,
 				wrapperStyle: {
-					backgroundImage:
-						window.innerWidth >= 650
-							? `url('${process.env.PUBLIC_URL + this.props.data[0].img}')`
-							: `url('${process.env.PUBLIC_URL + this.props.data[0].mobileImg}')`,
+					backgroundImage: window.innerWidth >= 650 ? `url('${this.props.data[0].img}')` : `url('${this.props.data[0].mobileImg}')`,
 				},
 				panelStyle: {
 					background: this.props.data[0].colour,
@@ -60,10 +52,7 @@ class Carousel extends React.Component {
 		this.setState({
 			activeID: id,
 			wrapperStyle: {
-				backgroundImage:
-					window.innerWidth >= 650
-						? `url('${process.env.PUBLIC_URL + this.props.data[id].img}')`
-						: `url('${process.env.PUBLIC_URL + this.props.data[id].mobileImg}')`,
+				backgroundImage: window.innerWidth >= 650 ? `url('${this.props.data[id].img}')` : `url('${this.props.data[id].mobileImg}')`,
 			},
 			panelStyle: {
 				backgroundColor: this.props.data[id].colour,
